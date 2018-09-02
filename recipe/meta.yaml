@@ -10,22 +10,23 @@ package:
 source:
   fn: whisker_{{ version }}.tar.gz
   url:
-    - https://cran.r-project.org/src/contrib/whisker_{{ version }}.tar.gz
-    - https://cran.r-project.org/src/contrib/Archive/whisker/whisker_{{ version }}.tar.gz
-
-
+    - {{ cran_mirror }}/src/contrib/whisker_{{ version }}.tar.gz
+    - {{ cran_mirror }}/src/contrib/Archive/whisker/whisker_{{ version }}.tar.gz
   sha256: 484836510fcf123a66ddd13cdc8f32eb98e814cad82ed30c0294f55742b08c7c
 
 build:
-  number: 0
+  merge_build_host: True  # [win]
+  number: 1
 
   rpaths:
     - lib/R/lib/
     - lib/
-  skip: True  # [win32]
 
 requirements:
   build:
+    - {{posix}}zip               # [win]
+
+  host:
     - r-base
 
   run:
@@ -33,19 +34,23 @@ requirements:
 
 test:
   commands:
-    - $R -e "library('whisker')"  # [not win]
+    - $R -e "library('whisker')"           # [not win]
     - "\"%R%\" -e \"library('whisker')\""  # [win]
-
-
 
 about:
   home: http://github.com/edwindj/whisker
   license: GPL-3
   summary: logicless templating, reuse templates in many programming languages including R
   license_family: GPL3
-
-
+  license_file: '{{ environ["PREFIX"] }}/lib/R/share/licenses/GPL-3'  # [unix]
+  license_file: '{{ environ["PREFIX"] }}\R\share\licenses\GPL-3'  # [win]
 
 extra:
   recipe-maintainers:
+    - johanneskoester
+    - bgruening
+    - daler
+    - jdblischak
+    - cbrueffer
     - croth1
+    - dbast
