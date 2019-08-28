@@ -1,4 +1,4 @@
-{% set version = '0.3-2' %}
+{% set version = "0.4" %}
 
 {% set posix = 'm2-' if win else '' %}
 {% set native = 'm2w64-' if win else '' %}
@@ -12,12 +12,12 @@ source:
   url:
     - {{ cran_mirror }}/src/contrib/whisker_{{ version }}.tar.gz
     - {{ cran_mirror }}/src/contrib/Archive/whisker/whisker_{{ version }}.tar.gz
-  sha256: 484836510fcf123a66ddd13cdc8f32eb98e814cad82ed30c0294f55742b08c7c
+  sha256: 7a86595be4f1029ec5d7152472d11b16175737e2777134e296ae97341bf8fba8
 
 build:
   noarch: generic
   merge_build_host: True  # [win]
-  number: 1002
+  number: 0
 
   rpaths:
     - lib/R/lib/
