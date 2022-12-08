@@ -1,5 +1,4 @@
-{% set version = "0.4" %}
-
+{% set version = "0.4.1" %}
 {% set posix = 'm2-' if win else '' %}
 {% set native = 'm2w64-' if win else '' %}
 
@@ -8,17 +7,15 @@ package:
   version: {{ version|replace("-", "_") }}
 
 source:
-  fn: whisker_{{ version }}.tar.gz
   url:
     - {{ cran_mirror }}/src/contrib/whisker_{{ version }}.tar.gz
     - {{ cran_mirror }}/src/contrib/Archive/whisker/whisker_{{ version }}.tar.gz
-  sha256: 7a86595be4f1029ec5d7152472d11b16175737e2777134e296ae97341bf8fba8
+  sha256: bf5151494508032f68ac41e211bda80da9087c65c7068ffdd12f16669bf1f2bc
 
 build:
-  noarch: generic
   merge_build_host: True  # [win]
-  number: 2
-
+  number: 0
+  noarch: generic
   rpaths:
     - lib/R/lib/
     - lib/
@@ -26,10 +23,9 @@ build:
 requirements:
   build:
     - {{ posix }}zip               # [win]
-
+    - cross-r-base {{ r_base }}    # [build_platform != target_platform]
   host:
     - r-base
-
   run:
     - r-base
 
@@ -40,11 +36,11 @@ test:
 
 about:
   home: http://github.com/edwindj/whisker
-  license: GPL-3
+  license: GPL-3.0-only
   summary: logicless templating, reuse templates in many programming languages including R
   license_family: GPL3
-  license_file: '{{ environ["PREFIX"] }}/lib/R/share/licenses/GPL-3'  # [unix]
-  license_file: '{{ environ["PREFIX"] }}\R\share\licenses\GPL-3'  # [win]
+  license_file:
+    - {{ environ["PREFIX"] }}/lib/R/share/licenses/GPL-3
 
 extra:
   recipe-maintainers:
