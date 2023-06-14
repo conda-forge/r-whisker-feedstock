@@ -1,11 +1,11 @@
-About r-whisker
-===============
+About r-whisker-feedstock
+=========================
+
+Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/r-whisker-feedstock/blob/main/LICENSE.txt)
 
 Home: http://github.com/edwindj/whisker
 
 Package license: GPL-3.0-only
-
-Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/r-whisker-feedstock/blob/main/LICENSE.txt)
 
 Summary: logicless templating, reuse templates in many programming languages including R
 
